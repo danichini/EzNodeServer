@@ -32,10 +32,22 @@ exports.getEditProduct = (req, res, next) => {
       pageTitle: 'Edit Product',
       path: '/admin/edit-product',
       editing: editMode,
-      product
+      product,
+      productId: product.id
   })
   });
 };
+
+exports.postEditProduct = (req, res, next ) => {
+  const prodId = req.body.productId
+  const updatedTitle = req.body.title
+  const updatedPrice = req.body.price
+  const updatedImage = req.body.imageUrl
+  const updatedDescription = req.body.description
+  const updatedProduct = new Product(prodId, updatedTitle, updatedImage, updatedDescription, updatedPrice)
+  updatedProduct.save();
+  res.redirect('/admin/products')
+}
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {
