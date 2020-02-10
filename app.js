@@ -34,7 +34,7 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
-// User.hasMany(Product);
+User.hasMany(Product);
 
 //force shouldn't be used in production
 sequelize
