@@ -11,6 +11,9 @@ Cart.init({
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
+  },
+  quantity: {
+    type: Sequelize.DOUBLE
   }
 }, {
   sequelize,
