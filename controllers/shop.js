@@ -96,9 +96,9 @@ exports.postCartDeleteProduct = (req, res, next) => {
   req.user.getCart().then(cart =>
     cart.getProducts({where: {id: prodId}})
   ).then( products => {
-   const product = products[0]
-   //need to delete the product FROM the cart NOT the product table
-   product.cartItem.destroy()
+    const product = products[0]
+    //need to delete the product FROM the cart NOT the product table
+    product.cartItem.destroy()
   }).then( result => {
     res.redirect('/cart')
   }).catch(err => console.log(err)
