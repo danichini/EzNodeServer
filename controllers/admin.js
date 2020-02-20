@@ -1,9 +1,9 @@
-const Product = require('../models/product');
+const Product = require("../models/product");
 
 exports.getAddProduct = (req, res, next) => {
-  res.render('admin/edit-product', {
-    pageTitle: 'Add Product',
-    path: '/admin/add-product',
+  res.render("admin/edit-product", {
+    pageTitle: "Add Product",
+    path: "/admin/add-product",
     editing: false
   });
 };
@@ -13,14 +13,14 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const imageUrl = req.body.imageUrl;
-  const product = new Product(title, price, description, imageUrl)
+  const product = new Product(title, price, description, imageUrl);
   product
     .save()
-    .then( result => {
-      console.log('Created Product')
-      res.redirect('/admin/products')
+    .then(result => {
+      console.log("Created Product");
+      res.redirect("/admin/products");
     })
-    .catch( err => console.log(err))
+    .catch(err => console.log(err));
 };
 
 // exports.getEditProduct = (req, res, next) => {
@@ -66,22 +66,23 @@ exports.postAddProduct = (req, res, next) => {
 //       res.redirect('/admin/products');
 //     })
 //     .catch(err => console.log(err))
-  
+
 // };
 
-// exports.getProducts = (req, res, next) => {
-//   req.user.getProducts()
-//   // Product.findAll()
-//     .then(products => {
-//       console.log(products);
-//       res.render('admin/products', {
-//         prods: products,
-//         pageTitle: 'Admin Products',
-//         path: '/admin/products'
-//       });
-//     }).catch(err => console.log(err))
-//   }
-  
+exports.getProducts = (req, res, next) => {
+  Product.fetchAll()
+    .then(products => {
+      res.render("admin/products", {
+        prods: products,
+        pageTitle: "Admin Products",
+        path: "/admin/products"
+      });
+    })
+    .catch(res => {
+      console.log(res);
+    });
+};
+
 // exports.postDeleteProduct = (req, res, next) => {
 //   const prodId = req.body.productId;
 //   Product.findByPk(prodId)
