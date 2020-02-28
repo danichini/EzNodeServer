@@ -30,7 +30,6 @@ class User {
       .collection("users")
       .findOne({ _id: new mongodb.ObjectId(userId) })
       .then(result => {
-        console.log("found");
         return result;
       })
       .catch(err => console.log());
