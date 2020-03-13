@@ -1,20 +1,15 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
 
-const sequelize = require('../util/database')
+const sequelize = require('../util/database');
 
-const Model = Sequelize.Model
-
-class OrderItem extends Model {}
-OrderItem.init({
+const OrderItem = sequelize.define('orderItem', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
-    primaryKey: true,
+    primaryKey: true
   },
-}, {
-  sequelize,
-  modelName: 'orderItem'
-})
+  quantity: Sequelize.INTEGER
+});
 
-module.exports = OrderItem
+module.exports = OrderItem;
