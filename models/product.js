@@ -12,15 +12,16 @@ const productSchema = new Schema({
     required: true,
   },
   description: {
-    type: Number,
+    type: String,
     required: true,
   },
   imageUrl: {
-    type: Number,
+    type: String,
     required: true,
   },
 });
 
+module.exports = mongoose.model("Product", productSchema);
 // const mongodb = require('mongodb');
 // const getDb = require('../util/database').getDb;
 
