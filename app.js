@@ -2,9 +2,10 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+s;
 
 const errorController = require("./controllers/error");
-const mongoConnect = require("./util/database").mongoConnect;
 const User = require("./models/user");
 
 const app = express();
@@ -20,11 +21,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
   User.findById("5e5985561fb13d4934969cf2")
-    .then(user => {
+    .then((user) => {
       req.user = new User(user.name, user.email, user.cart, user._id);
       next();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 
 app.use("/admin", adminRoutes);
@@ -32,6 +33,11 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
-  app.listen(3000);
-});
+mongoose
+  .connect(
+    "mongodb+srv://danichini:7416@cluster0-1lz2a.mongodb.net/shops?retryWrites=true&w=majority"
+  )
+  .then(app.listen(3000))
+  .catch((err) => {
+    console.log(err);
+  });
