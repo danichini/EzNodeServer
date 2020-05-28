@@ -13,11 +13,13 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
+  const userId = req.user; // it should store the whole user but instead just the id
   const product = new Product({
     title,
     price,
     description,
     imageUrl,
+    userId,
   });
   product
     .save() // save method coming from mongoose
