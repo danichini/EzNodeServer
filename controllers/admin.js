@@ -79,7 +79,11 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
+    // .select("title price description imageUrl -_id") // the '-' excludes the parameter
+    // .populate("userId", "name")
     .then((products) => {
+      console.log(products);
+
       res.render("admin/products", {
         prods: products,
         pageTitle: "Admin Products",
